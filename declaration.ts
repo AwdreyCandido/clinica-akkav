@@ -1,7 +1,7 @@
 export interface ClinicData {
-  CodCli: number;
-  NomeCli: string;
-  Endereco: string;
-  Telefone: string;
-  Email: string;
+  CodCli: number | string | undefined;
+  NomeCli: string | undefined;
+  Endereco: string | undefined;
+  Telefone: string | undefined;
+  Email: string | undefined;
 }
