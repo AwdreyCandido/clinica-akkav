@@ -30,7 +30,7 @@ export async function updateClinic(newClinic: any) {
 
 export async function deleteClinic(id: any) {
   const res = await axios.delete("/api/clinics/delete-clinic", {
-    params: { id },
+    params: { id: id },
   });
   console.log("🚀 ~ file: clinics.ts:48 ~ deleteClinic ~ res:", res);
 

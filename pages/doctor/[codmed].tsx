@@ -39,7 +39,7 @@ const index = () => {
   return (
     <Layout>
       <section className="">
-        <div className="flex items-start justify-between w-full">
+        <div className="flex">
           <div className="flex items-center gap-10">
             <div className="min-h-[15rem] min-w-[15rem] bg-white flex items-center justify-center rounded-full overflow-hidden border border-blue-light">
               {/* <Image src={doctorImage} alt="" /> */}
@@ -63,7 +63,10 @@ const index = () => {
               </div>
             </div>
           </div>
-          <PrimaryButton onClick={editDoctorHandler} title="Editar doutor" />
+          <PrimaryButton
+            onClick={editDoctorHandler}
+            title="Editar doutor"
+          />
         </div>
 
         {pacients?.length === 0 ? (
