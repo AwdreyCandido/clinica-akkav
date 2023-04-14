@@ -36,3 +36,12 @@ export async function deleteClinic(id: any) {
 
   return res.data;
 }
+
+export async function deleteDoctorFromClinic(CodCli: any, CodMed: any) {
+  const res = await axios.delete("/api/clinics/delete-doctor", {
+    params: { CodCli, CodMed },
+  });
+  console.log(" ~ file: clinics.ts:48 ~ deleteClinic ~ res:", res);
+
+  return res.data;
+}
