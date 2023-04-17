@@ -6,12 +6,6 @@ import { HiArrowLeft, HiOutlineInformationCircle } from "react-icons/hi2";
 import { createNewDoctor, updateDoctor } from "@/services/doctors";
 import PrimaryButton from "../buttons/primary-button/PrimaryButton";
 
-// CodCli: 9999998,
-// NomeCli: "Clínica Sede1",
-// Endereco: "Av. 17 de Agosto",
-// Telefone: "(81) 2658-7561",
-// Email: "clinicased2@email.com",
-
 const EditDoctor: React.FC<{
   closeModal: () => void;
   doctor: DoctorData | any;
@@ -76,20 +70,7 @@ const EditDoctor: React.FC<{
           <option value="F">F</option>
         </select>
       </div>
-      {/* <div>
-        <h3 className="text-qh mb-2">Clínica</h3>
-        <select
-          name="Clinica"
-          value={props.doctor.NomeEspec}
-          onChange={getClinic}
-          placeholder="Selecione uma clínica..."
-          className="bg-body w-full text-qh h-[3.3rem] placeholder:text-base text-base px-4 rounded-lg"
-        >
-          {clinics.map((clinic) => {
-            return <option value={clinic.CodCli}>{clinic.NomeCli}</option>;
-          })}
-        </select>
-      </div> */}
+
       <div>
         <h3 className="text-qh mb-2">Telefone</h3>
         <input
