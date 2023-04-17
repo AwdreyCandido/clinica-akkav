@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ClinicData, DoctorData } from "@/declaration";
 import { createNewClinic } from "@/services/clinics";
 import { createCode } from "@/services/utils";
 import { HiArrowLeft, HiOutlineInformationCircle } from "react-icons/hi2";
 import { createNewDoctor, updateDoctor } from "@/services/doctors";
 import PrimaryButton from "../buttons/primary-button/PrimaryButton";
+import { ClinicContext } from "@/context/ClinicContext";
 
 const EditDoctor: React.FC<{
   closeModal: () => void;
   doctor: DoctorData | any;
 }> = (props) => {
   const [doctor, setDoctor] = useState<DoctorData>(props.doctor);
+
+  const { updateDoctorList } = useContext(ClinicContext);
 
   function getValue(
     event:
@@ -38,6 +41,8 @@ const EditDoctor: React.FC<{
   async function onSubmit(event: React.FormEvent<HTMLButtonElement>) {
     event.preventDefault();
     await updateDoctor(doctor);
+    updateDoctorList(doctor);
+    window.location.reload();
     props.closeModal();
   }
 

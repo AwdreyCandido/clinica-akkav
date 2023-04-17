@@ -9,6 +9,7 @@ export default async function handler(
 ) {
   const db = await connectDB();
   const { CodCli, NomeCli, Endereco, Telefone, Email } = req.body as ClinicData;
+  console.log("🚀 ~ file: update-clinic.ts:12 ~ req.body:", req.body)
 
   if (req.method === "PUT") {
     try {

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ClinicData } from "@/declaration";
 import { createNewClinic } from "@/services/clinics";
 import { createCode } from "@/services/utils";
 import { HiArrowLeft } from "react-icons/hi2";
+import { ClinicContext } from "@/context/ClinicContext";
 
 // CodCli: 9999998,
 // NomeCli: "Clínica Sede1",
@@ -14,6 +15,8 @@ const CreateClinic: React.FC<{
   closeModal: () => void;
 }> = (props) => {
   const [formData, setFormData] = useState({});
+
+  const { createClinic } = useContext(ClinicContext);
 
   function getValue(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
@@ -30,10 +33,14 @@ const CreateClinic: React.FC<{
   function onSubmit(event: React.FormEvent<HTMLButtonElement>) {
     event.preventDefault();
 
-    const clinic = Object.assign({ CodCli: createCode() }, { ...formData });
+    const clinic: any = Object.assign(
+      { CodCli: createCode() },
+      { ...formData }
+    );
     console.log("🚀 ~ file: CreateClinic.tsx:32 ~ onSubmit ~ clinic:", clinic);
 
     createNewClinic(clinic);
+    createClinic(clinic);
     props.closeModal();
   }
 

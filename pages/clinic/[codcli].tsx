@@ -9,11 +9,19 @@ import noData from "./../../public/assets/images/noData.svg";
 
 import { TbPhone, TbMapPin, TbMail } from "react-icons/tb";
 import Table from "@/components/table/Table";
+import PrimaryButton from "@/components/buttons/primary-button/PrimaryButton";
+import CentralModal from "@/components/modals/CentralModal";
+import EditClinic from "@/components/forms/EditClinic";
 
 const index = () => {
+  const [showForm, setShowForm] = useState(false);
   const [clinic, setClinic] = useState<ClinicData>();
   const [doctors, setDoctors] = useState<DoctorData[] | undefined>();
   const router = useRouter();
+
+  function showFormHandler() {
+    setShowForm(!showForm);
+  }
 
   useEffect(() => {
     const id = window.localStorage.getItem("id");
@@ -30,25 +38,36 @@ const index = () => {
   return (
     <Layout>
       <section className="">
-        <div className="flex items-center gap-10">
-          <div className="w-[16rem] h-[16rem] border border-blue-light rounded-3xl overflow-hidden">
-            <Image src={clinicImage} alt="" />
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-10">
+            <div className="w-[16rem] h-[16rem] border border-blue-light rounded-3xl overflow-hidden">
+              <Image src={clinicImage} alt="" />
+            </div>
+            <div>
+              <p className="text-ph font-medium mb-2 w-max">{clinic?.NomeCli}</p>
+              <div className=" flex flex-col gap-2 text-qh">
+                <div className="flex items-center gap-4">
+                  <TbMail className="text-sh text-blue-primary" />
+                  <p>{clinic?.Email}</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <TbMapPin className="text-sh text-blue-primary" />
+                  <p>{clinic?.Endereco}</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <TbPhone className="text-sh text-blue-primary" />
+                  <p>{clinic?.Telefone}</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <p className="text-ph font-medium mb-2">{clinic?.NomeCli}</p>
-            <div className=" flex flex-col gap-2 text-qh">
-              <div className="flex items-center gap-4">
-                <TbMail className="text-sh text-blue-primary" />
-                <p>{clinic?.Email}</p>
-              </div>
-              <div className="flex items-center gap-4">
-                <TbMapPin className="text-sh text-blue-primary" />
-                <p>{clinic?.Endereco}</p>
-              </div>
-              <div className="flex items-center gap-4">
-                <TbPhone className="text-sh text-blue-primary" />
-                <p>{clinic?.Telefone}</p>
-              </div>
+          <div className="flex justify-end w-full gap-12">
+            <div>
+              <PrimaryButton
+                type="primary"
+                onClick={showFormHandler}
+                title="Editar Clínica"
+              />
             </div>
           </div>
         </div>
@@ -67,6 +86,18 @@ const index = () => {
           </>
         )}
       </section>
+
+      <>
+        {showForm && (
+          <CentralModal
+            children={
+              <EditClinic clinic={clinic} closeModal={showFormHandler} />
+            }
+            isOpen={showForm}
+            closeModal={showFormHandler}
+          />
+        )}
+      </>
     </Layout>
   );
 };

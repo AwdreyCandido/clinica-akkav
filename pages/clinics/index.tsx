@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { deleteClinic, getAllClinics } from "@/services/clinics";
 
 import clinicImage from "./../../public/assets/images/clinic.jpg";
@@ -9,10 +9,12 @@ import Link from "next/link";
 import Layout from "@/components/layout/Layout";
 import CentralModal from "@/components/modals/CentralModal";
 import PrimaryButton from "@/components/buttons/primary-button/PrimaryButton";
+import { ClinicContext } from "@/context/ClinicContext";
 
 const index = () => {
-  const [clinics, setClinics] = useState([]);
   const [showForm, setShowForm] = useState(false);
+
+  const { setClinics, clinicsList } = useContext(ClinicContext);
 
   useEffect(() => {
     getAllClinicsHandler();
@@ -25,10 +27,6 @@ const index = () => {
 
   function showFormHandler() {
     setShowForm(!showForm);
-  }
-
-  function deleteHandler() {
-    deleteClinic("C000001");
   }
 
   function selectedIdHandler(this: string) {
@@ -45,18 +43,18 @@ const index = () => {
             <PrimaryButton
               onClick={showFormHandler}
               title="Cadastrar nova Clínica"
-              type="primary" 
+              type="primary"
             />
           </div>
         </div>
         <section className="flex flex-col justify-center md:grid place-content-center  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-between gap-12">
-          {clinics.map((clinic: any) => {
+          {clinicsList?.map((clinic: any) => {
             return (
               <Link
                 href={`/clinic/${clinic.CodCli}`}
                 onClick={selectedIdHandler.bind(clinic.CodCli)}
               >
-                <div  className="bg-white flex w-full items-center border border-blue-light gap-8 text-qh rounded-3xl py-6 px-8 cursor-pointer shadow-md hover:shadow-none duration-300">
+                <div className="bg-white flex w-full items-center border border-blue-light gap-8 text-qh rounded-3xl py-6 px-8 cursor-pointer shadow-md hover:shadow-none duration-300">
                   <div className="h-[10rem] w-[10rem] rounded-full overflow-hidden border border-blue-light">
                     <Image src={clinicImage} alt="" />
                   </div>

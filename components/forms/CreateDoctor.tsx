@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ClinicData } from "@/declaration";
 import { createNewClinic } from "@/services/clinics";
 import { createCode } from "@/services/utils";
 import { HiArrowLeft, HiOutlineInformationCircle } from "react-icons/hi2";
 import { createNewDoctor } from "@/services/doctors";
+import { ClinicContext } from "@/context/ClinicContext";
 
 // CodCli: 9999998,
 // NomeCli: "Clínica Sede1",
@@ -15,6 +16,7 @@ const CreateDoctor: React.FC<{
   closeModal: () => void;
 }> = (props) => {
   const [formData, setFormData] = useState({});
+  const { createDoctor, clinicsList } = useContext(ClinicContext);
 
   function getValue(
     event:
@@ -56,61 +58,16 @@ const CreateDoctor: React.FC<{
   async function onSubmit(event: React.FormEvent<HTMLButtonElement>) {
     event.preventDefault();
 
-    const doctor = Object.assign(
+    const doctor: any = Object.assign(
       { CodMed: createCode() },
       { CodEspec: "ESP000" },
       { ...formData }
     );
-    console.log("🚀 ~ file: CreateDoctor.tsx:38 ~ onSubmit ~ doctor:", doctor);
 
     await createNewDoctor(doctor);
+    createDoctor(doctor);
     props.closeModal();
   }
-
-  const clinics = [
-    {
-      CodCli: "C000001",
-      NomeCli: "Clínica Sede1",
-      Endereco: "Av. 17 de Agosto",
-      Telefone: "(81) 2658-7561",
-      Email: "clinicasede@email.com",
-    },
-    {
-      CodCli: "C000002",
-      NomeCli: "Clínica Acolher",
-      Endereco: "Rua das Flores",
-      Telefone: "(81) 9999-9999",
-      Email: "clinicaacolher@email.com",
-    },
-    {
-      CodCli: "C000003",
-      NomeCli: "Clínica Vida Saudável",
-      Endereco: "Rua das Palmeiras",
-      Telefone: "(81) 8888-8888",
-      Email: "clinicavida@email.com",
-    },
-    {
-      CodCli: "C000004",
-      NomeCli: "Clínica Esperança",
-      Endereco: "Rua dos Sonho",
-      Telefone: "(81) 7777-7777",
-      Email: "clinicaesperanca@email.com",
-    },
-    {
-      CodCli: "C000005",
-      NomeCli: "Clínica Saúde Total",
-      Endereco: "Rua das Pedras",
-      Telefone: "(81) 6666-6666",
-      Email: "clinicasaudetotal@email.com",
-    },
-    {
-      CodCli: "C000006",
-      NomeCli: "Clínica Bem Estar",
-      Endereco: "Rua das Águas",
-      Telefone: "(81) 5555-5555",
-      Email: "clinicabemestar@email.com",
-    },
-  ];
 
   return (
     // <Backdrop>
@@ -156,8 +113,12 @@ const CreateDoctor: React.FC<{
             Selecione uma clínica...
           </option>
           {/* RODAR LOOP COM TODAS AS CLINICAS CADASTRADAS */}
-          {clinics.map((clinic) => {
-            return <option key={clinic.CodCli} value={clinic.CodCli}>{clinic.NomeCli}</option>;
+          {clinicsList?.map((clinic) => {
+            return (
+              <option key={clinic.CodCli} value={clinic.CodCli}>
+                {clinic.NomeCli}
+              </option>
+            );
           })}
         </select>
         <div className="flex gap-1">

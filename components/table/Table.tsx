@@ -15,6 +15,7 @@ const Table: React.FC<{ list: any; type: string }> = ({ list, type }) => {
     const codClinic = window.localStorage.getItem("id");
     const res = await deleteDoctorFromClinic(codClinic, codDoctor);
     if (res.message === "success") {
+      window.location.reload();
       setShowAlert(false);
     }
   }

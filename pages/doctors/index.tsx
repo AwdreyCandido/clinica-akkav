@@ -1,7 +1,7 @@
 import Layout from "@/components/layout/Layout";
 import { getAllDoctors } from "@/services/doctors";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import doctorImage from "./../../public/assets/images/doctor.jpg";
 import Image from "next/image";
 import { FaHandHoldingMedical } from "react-icons/fa";
@@ -9,10 +9,12 @@ import CentralModal from "@/components/modals/CentralModal";
 import { DoctorData } from "@/declaration";
 import CreateDoctor from "@/components/forms/CreateDoctor";
 import PrimaryButton from "@/components/buttons/primary-button/PrimaryButton";
+import { ClinicContext } from "@/context/ClinicContext";
 
 const index = () => {
-  const [doctors, setDoctors] = useState([]);
   const [showForm, setShowForm] = useState(false);
+
+  const { setDoctors, doctorsList } = useContext(ClinicContext);
 
   useEffect(() => {
     getAllDoctorsHandler();
@@ -47,7 +49,7 @@ const index = () => {
         </div>
         {/* <section className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-between gap-12"> */}
         <section className="grid place-content-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
-          {doctors.map((doctor: any) => {
+          {doctorsList?.map((doctor: any) => {
             return (
               <Link
                 href={`/doctor/${doctor.CodMed}`}
@@ -60,10 +62,11 @@ const index = () => {
                   </div>
                   <div className="w-max flex flex-col gap-2">
                     <p className=" -translate-x-2">
-                      {doctor.Genero == "M" ? "Dr." : "Dra."} {doctor.NomeMed.split(" ").slice(0, 2).join(" ")}
+                      {doctor.Genero == "M" ? "Dr." : "Dra."}{" "}
+                      {doctor.NomeMed.split(" ").slice(0, 2).join(" ")}
                     </p>
                     <p>{doctor.Telefone}</p>
-                    <p className=" -translate-x-2" >{doctor.Email}</p>
+                    <p className=" -translate-x-2">{doctor.Email}</p>
                   </div>
                 </div>
               </Link>

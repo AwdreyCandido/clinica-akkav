@@ -31,6 +31,7 @@ export async function createNewClinic(newClinic: any) {
 }
 
 export async function updateClinic(newClinic: any) {
+  console.log("🚀 ~ file: clinics.ts:34 ~ updateClinic ~ newClinic:", newClinic)
   try {
     const res = await axios.put("/api/clinics/update-clinic", newClinic);
     return res.data;

@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ClinicData } from "@/declaration";
-import { createNewClinic } from "@/services/clinics";
+import { createNewClinic, updateClinic } from "@/services/clinics";
 import { createCode } from "@/services/utils";
 import { HiArrowLeft } from "react-icons/hi2";
+import { ClinicContext } from "@/context/ClinicContext";
 
-// CodCli: 9999998,
-// NomeCli: "Clínica Sede1",
-// Endereco: "Av. 17 de Agosto",
-// Telefone: "(81) 2658-7561",
-// Email: "clinicased2@email.com",
-
-const CreateClinic: React.FC<{
+const EditClinic: React.FC<{
   closeModal: () => void;
+  clinic: ClinicData | any;
 }> = (props) => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState(props.clinic);
+
+  const { updateClinicList } = useContext(ClinicContext);
 
   function getValue(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
@@ -27,29 +25,32 @@ const CreateClinic: React.FC<{
     setFormData(form);
   }
 
-  function onSubmit(event: React.FormEvent<HTMLButtonElement>) {
+  async function onSubmit(event: React.FormEvent<HTMLButtonElement>) {
     event.preventDefault();
 
-    const clinic = Object.assign({ CodCli: createCode() }, { ...formData });
-    console.log("🚀 ~ file: CreateClinic.tsx:32 ~ onSubmit ~ clinic:", clinic);
+    const clinic: any = Object.assign(
+      { CodCli: createCode() },
+      { ...formData }
+    );
 
-    createNewClinic(clinic);
+    await updateClinic(clinic);
+    updateClinicList(clinic);
+    window.location.reload();
     props.closeModal();
   }
 
   return (
-    // <Backdrop>
-
     <form className="flex flex-col gap-4 p-8 rounded-3xl bg-white w-fit border border-blue-light">
       <h1 className="text-ph flex items-center gap-8 w-fit font-medium">
         <HiArrowLeft className="cursor-pointer" onClick={props.closeModal} />
-        Cadastrar Clínica
+        Editar Clínica
       </h1>
 
       <div>
         <h3 className="text-qh mb-2">Nome</h3>
         <input
           name="NomeCli"
+          defaultValue={props.clinic.NomeCli}
           placeholder="Ex: Clínica AKKAV"
           onChange={getValue}
           className="bg-body w-full text-qh h-[3.3rem] placeholder:text-base text-base px-4 rounded-lg"
@@ -59,6 +60,7 @@ const CreateClinic: React.FC<{
         <h3 className="text-qh mb-2">Endereço</h3>
         <input
           name="Endereco"
+          defaultValue={props.clinic.Endereco}
           placeholder="Ex: Av. Gatinho fofinho, nº2"
           onChange={getValue}
           className="bg-body w-full text-qh h-[3.3rem] placeholder:text-base text-base px-4 rounded-lg"
@@ -68,6 +70,7 @@ const CreateClinic: React.FC<{
         <h3 className="text-qh mb-2">Telefone</h3>
         <input
           name="Telefone"
+          defaultValue={props.clinic.Telefone}
           placeholder="Ex: (99) 99999-9999"
           onChange={getValue}
           type="tel"
@@ -79,6 +82,7 @@ const CreateClinic: React.FC<{
         <h3 className="text-qh mb-2">E-mail</h3>
         <input
           name="Email"
+          defaultValue={props.clinic.Email}
           placeholder="Ex: clinica@akkav.com.br"
           onChange={getValue}
           className="bg-body w-full text-qh h-[3.3rem] placeholder:text-base text-base px-4 rounded-lg"
@@ -99,8 +103,7 @@ const CreateClinic: React.FC<{
         </button>
       </div>
     </form>
-    // </Backdrop>
   );
 };
 
-export default CreateClinic;
+export default EditClinic;

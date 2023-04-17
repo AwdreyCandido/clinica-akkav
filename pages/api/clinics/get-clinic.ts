@@ -10,7 +10,6 @@ export default async function handler(
   const db = await connectDB();
 
   const { CodCli } = req.body;
-  console.log("🚀 ~ file: get-clinic.ts:13 ~ CodCli:", CodCli);
 
   if (req.method === "POST") {
     const [clinic] = await db.query(

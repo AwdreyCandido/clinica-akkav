@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import Layout from "@/components/layout/Layout";
 import { getClinic } from "@/services/clinics";
@@ -14,6 +14,7 @@ import CentralModal from "@/components/modals/CentralModal";
 import EditDoctor from "@/components/forms/EditDoctor";
 import DeleteAlert from "@/components/modals/DeleteAlert";
 import noData from "./../../public/assets/images/noData.svg";
+import { ClinicContext } from "@/context/ClinicContext";
 
 const index = () => {
   const [showForm, setShowForm] = useState(false);
@@ -21,12 +22,14 @@ const index = () => {
   const [doctor, setDoctor] = useState<DoctorData>();
   const [pacients, setPacients] = useState<any[]>();
 
+  const { doctorsList } = useContext(ClinicContext);
+
   const router = useRouter();
 
   useEffect(() => {
     const id = window.localStorage.getItem("id");
     getDoctorHandler(id!);
-  }, []);
+  }, [doctorsList]);
 
   async function getDoctorHandler(id: string) {
     const res = await getDoctor({ CodMed: id });
@@ -56,7 +59,6 @@ const index = () => {
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-10">
             <div className="min-h-[15rem] min-w-[15rem] bg-white flex items-center justify-center rounded-full overflow-hidden border border-blue-light">
-              {/* <Image src={doctorImage} alt="" /> */}
               <FaHandHoldingMedical className="text-[6rem] text-blue-light" />
             </div>
             <div>
