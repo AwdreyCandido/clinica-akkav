@@ -5,6 +5,7 @@ import { getClinic } from "@/services/clinics";
 import { ClinicData, DoctorData } from "@/declaration";
 import Image from "next/image";
 import clinicImage from "./../../public/assets/images/clinic.jpg";
+import noData from "./../../public/assets/images/noData.svg";
 
 import { TbPhone, TbMapPin, TbMail } from "react-icons/tb";
 import Table from "@/components/table/Table";
@@ -53,10 +54,11 @@ const index = () => {
         </div>
 
         {doctors?.length === 0 ? (
-          <div>
-            <h1 className="text-ph mt-12 font-medium text-black-40">
-              Não existem médicos cadastrados nessa clínica
+          <div className="flex flex-col gap-12 justify-center mt-24 items-center">
+            <h1 className="text-sh text-center font-medium text-black-40">
+              Não existem médicos cadastrados nessa clínica...
             </h1>
+            <Image src={noData} alt="" className="w-[55rem]" />
           </div>
         ) : (
           <>

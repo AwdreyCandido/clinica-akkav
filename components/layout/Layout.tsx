@@ -7,7 +7,7 @@ const Layout: React.FC<{ children: JSX.Element | JSX.Element[] }> = ({
   return (
     <main className=" h-screen flex bg-body overflow">
       <Navigation />
-      <section className="w-full h-screen overflow-y-auto sm:px py-8 px-12">
+      <section className="w-full h-screen overflow-y-auto sm:px py-8 px-16">
         {children}
       </section>
     </main>

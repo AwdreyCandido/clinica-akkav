@@ -41,10 +41,13 @@ const index = () => {
         <div className="w-full flex justify-between items-center mb-12">
           <h1 className="text-ph font-medium">Clínicas</h1>
 
-          <PrimaryButton
-            onClick={showFormHandler}
-            title="Cadastrar nova Clínica"
-          />
+          <div>
+            <PrimaryButton
+              onClick={showFormHandler}
+              title="Cadastrar nova Clínica"
+              type="primary" 
+            />
+          </div>
         </div>
         <section className="flex flex-col justify-center md:grid place-content-center  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-between gap-12">
           {clinics.map((clinic: any) => {
@@ -53,14 +56,14 @@ const index = () => {
                 href={`/clinic/${clinic.CodCli}`}
                 onClick={selectedIdHandler.bind(clinic.CodCli)}
               >
-                <div className="bg-white flex w-full items-center border border-blue-light gap-8 text-qh rounded-3xl py-6 px-8 cursor-pointer shadow-md hover:shadow-none duration-300">
+                <div  className="bg-white flex w-full items-center border border-blue-light gap-8 text-qh rounded-3xl py-6 px-8 cursor-pointer shadow-md hover:shadow-none duration-300">
                   <div className="h-[10rem] w-[10rem] rounded-full overflow-hidden border border-blue-light">
                     <Image src={clinicImage} alt="" />
                   </div>
-                  <div>
-                    <p>{clinic.NomeCli}</p>
+                  <div className="w-max flex flex-col gap-2">
+                    <p className=" -translate-x-2">{clinic.NomeCli}</p>
                     <p>{clinic.Endereco}</p>
-                    <p>{clinic.Telefone}</p>
+                    <p className=" -translate-x-2">{clinic.Telefone}</p>
                   </div>
                 </div>
               </Link>

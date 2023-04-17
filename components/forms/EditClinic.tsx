@@ -41,7 +41,7 @@ const CreateClinic: React.FC<{
     // <Backdrop>
 
     <form className="flex flex-col gap-4 p-8 rounded-3xl bg-white w-fit border border-blue-light">
-      <h1 className="text-sh flex items-center w-[32rem] gap-8 font-medium">
+      <h1 className="text-ph flex items-center gap-8 w-fit font-medium">
         <HiArrowLeft className="cursor-pointer" onClick={props.closeModal} />
         Cadastrar Clínica
       </h1>

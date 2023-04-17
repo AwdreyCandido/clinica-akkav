@@ -8,7 +8,7 @@ import { FaHandHoldingMedical } from "react-icons/fa";
 import CentralModal from "@/components/modals/CentralModal";
 import { DoctorData } from "@/declaration";
 import CreateDoctor from "@/components/forms/CreateDoctor";
-
+import PrimaryButton from "@/components/buttons/primary-button/PrimaryButton";
 
 const index = () => {
   const [doctors, setDoctors] = useState([]);
@@ -37,32 +37,33 @@ const index = () => {
         <div className="w-full flex justify-between items-center mb-12">
           <h1 className="text-ph font-medium">Médicos</h1>
 
-          <button
-            onClick={showFormHandler}
-            className="text-base bg-blue-primary text-white py-5 px-8 rounded-3xl "
-          >
-            Cadastrar novo Médico
-          </button>
+          <div>
+            <PrimaryButton
+              onClick={showFormHandler}
+              title="Cadastrar novo Médico"
+              type="primary"
+            />
+          </div>
         </div>
         {/* <section className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-between gap-12"> */}
-        <section className="grid place-content-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-12">
+        <section className="grid place-content-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
           {doctors.map((doctor: any) => {
             return (
               <Link
                 href={`/doctor/${doctor.CodMed}`}
                 onClick={selectedIdHandler.bind(doctor.CodMed)}
               >
-                <div className="bg-white flex flex-col w-[22rem] items-center border border-blue-light gap-8 text-qh rounded-3xl p-8 cursor-pointer shadow-md hover:shadow-none duration-300">
-                  <div className="min-h-[15rem] min-w-[15rem] flex items-center justify-center rounded-full overflow-hidden border border-blue-light">
+                <div className="bg-white overflow-hidden flex w-full items-center border border-blue-light gap-4 text-qh rounded-3xl p-6 cursor-pointer shadow-md hover:shadow-none duration-300">
+                  <div className="min-h-[10rem] min-w-[10rem] rounded-full flex justify-center items-center overflow-hidden border border-blue-light">
                     {/* <Image src={doctorImage} alt="" /> */}
                     <FaHandHoldingMedical className="text-[6rem] text-blue-light" />
                   </div>
-                  <div>
-                    <p>
-                      {doctor.Genero == "M" ? "Dr." : "Dra."} {doctor.NomeMed}
+                  <div className="w-max flex flex-col gap-2">
+                    <p className=" -translate-x-2">
+                      {doctor.Genero == "M" ? "Dr." : "Dra."} {doctor.NomeMed.split(" ").slice(0, 2).join(" ")}
                     </p>
                     <p>{doctor.Telefone}</p>
-                    <p>{doctor.Email}</p>
+                    <p className=" -translate-x-2" >{doctor.Email}</p>
                   </div>
                 </div>
               </Link>

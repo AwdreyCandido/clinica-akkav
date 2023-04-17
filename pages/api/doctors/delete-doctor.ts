@@ -8,7 +8,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const db = await connectDB();
-  const { CodMed } = req.body as DoctorData;
+
+  const { CodMed } = req.query;
 
   if (req.method === "DELETE") {
     console.log("🚀 ~ file: clinics.ts:47 ~  req.body:", req.body);
