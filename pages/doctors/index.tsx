@@ -57,7 +57,6 @@ const index = () => {
               >
                 <div className="bg-white overflow-hidden flex w-full items-center border border-blue-light gap-4 text-qh rounded-3xl p-6 cursor-pointer shadow-md hover:shadow-none duration-300">
                   <div className="min-h-[10rem] min-w-[10rem] rounded-full flex justify-center items-center overflow-hidden border border-blue-light">
-                    {/* <Image src={doctorImage} alt="" /> */}
                     <FaHandHoldingMedical className="text-[6rem] text-blue-light" />
                   </div>
                   <div className="w-max flex flex-col gap-2">

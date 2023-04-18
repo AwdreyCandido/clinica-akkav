@@ -5,7 +5,6 @@ export async function getClinic(id: any) {
     const res = await axios.post("/api/clinics/get-clinic", id);
     return res.data;
   } catch (error: any) {
-    console.log("🚀 ~ file: clinics.ts:10 ~ getClinic ~ error:", error);
     return error.response;
   }
 }
@@ -15,7 +14,6 @@ export async function getAllClinics() {
     const res = await axios.get("/api/clinics/get-all-clinics");
     return res.data;
   } catch (error: any) {
-    console.log("🚀 ~ file: clinics.ts:17 ~ getAllClinics ~ error:", error);
     return error.response;
   }
 }
@@ -25,18 +23,15 @@ export async function createNewClinic(newClinic: any) {
     const res = await axios.post("/api/clinics/create-clinic", newClinic);
     return res.data;
   } catch (error: any) {
-    console.log("🚀 ~ file: clinics.ts:22 ~ createNewClinic ~ error:", error);
     return error.response;
   }
 }
 
 export async function updateClinic(newClinic: any) {
-  console.log("🚀 ~ file: clinics.ts:34 ~ updateClinic ~ newClinic:", newClinic)
   try {
     const res = await axios.put("/api/clinics/update-clinic", newClinic);
     return res.data;
   } catch (error: any) {
-    console.log("🚀 ~ file: clinics.ts:30 ~ updateClinic ~ error:", error);
     return error.response;
   }
 }
@@ -60,10 +55,7 @@ export async function deleteDoctorFromClinic(CodCli: any, CodMed: any) {
     });
     return res.data;
   } catch (error: any) {
-    console.log(
-      "🚀 ~ file: clinics.ts:47 ~ deleteDoctorFromClinic ~ error:",
-      error
-    );
+
     return error.response;
   }
 }
