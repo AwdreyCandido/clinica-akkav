@@ -99,7 +99,7 @@ const EditClinic: React.FC<{
           onClick={onSubmit}
           className="text-base w-full bg-blue-primary text-white py-6 px-8 rounded-3xl"
         >
-          Cadastrar
+          Confirmar
         </button>
       </div>
     </form>

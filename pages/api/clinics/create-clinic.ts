@@ -17,7 +17,6 @@ export default async function handler(
       );
       res.status(200).json({ message: "success" });
     } catch (error: any) {
-      console.log("🚀 ~ file: clinics.ts:30 ~ error:", error);
       res.status(500).json({ message: "failed" });
     }
   }

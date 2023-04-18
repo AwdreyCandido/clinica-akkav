@@ -10,13 +10,12 @@ export default async function handler(
   const db = await connectDB();
 
   const { CodMed } = req.body as DoctorData;
-  console.log("🚀 ~ file: get-doctor.ts:13 ~ CodMed:", CodMed);
 
   if (req.method === "POST") {
     const [doctor] = await db.query(
       `SELECT * FROM Medico
       JOIN especialidade ON Medico.CodEspec = Especialidade.CodEspec
-      WHERE CodMed = '${CodMed}'` // 'C000002'
+      WHERE CodMed = '${CodMed}'`
     );
 
     const [pacients] = await db.query(
@@ -32,7 +31,7 @@ export default async function handler(
       FROM Medico
       JOIN AgendaConsulta ON Medico.codmed = AgendaConsulta.codmed
       JOIN Paciente ON AgendaConsulta.CpfPaciente = Paciente.CpfPaciente
-      WHERE Medico.codmed = '${CodMed}'` //'${CodCli}'
+      WHERE Medico.codmed = '${CodMed}'`
     );
 
     res.status(200).json({ doctor, pacients });

@@ -14,13 +14,12 @@ export default async function handler(
   if (req.method === "DELETE") {
     try {
       const results = await db.execute(
-       `DELETE FROM clinicaMedico 
+        `DELETE FROM clinicaMedico 
         WHERE clinicaMedico.CodCli = '${CodCli}'
         AND clinicaMedico.CodMed = '${CodMed}'`
       );
       res.status(200).json({ message: "success" });
     } catch (error: any) {
-      console.log("🚀 ~ file: clinics.ts:30 ~ error:", error);
       res.status(500).json({ message: "failed" });
     }
   }

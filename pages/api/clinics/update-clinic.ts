@@ -9,7 +9,6 @@ export default async function handler(
 ) {
   const db = await connectDB();
   const { CodCli, NomeCli, Endereco, Telefone, Email } = req.body as ClinicData;
-  console.log("🚀 ~ file: update-clinic.ts:12 ~ req.body:", req.body)
 
   if (req.method === "PUT") {
     try {
@@ -18,7 +17,6 @@ export default async function handler(
       );
       res.status(200).json({ message: "success" });
     } catch (error: any) {
-      console.log("🚀 ~ file: clinics.ts:30 ~ error:", error);
       res.status(500).json({ message: "failed" });
     }
   }
