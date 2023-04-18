@@ -21,8 +21,8 @@ export const ClinicContext = createContext({} as ClinicContextType);
 const ClinicDataProvider: React.FC<{ children: JSX.Element }> = ({
   children,
 }) => {
-  const [clinicsList, setClinicsList] = useState<any[]>();
-  const [doctorsList, setDoctorsList] = useState<any[]>();
+  const [clinicsList, setClinicsList] = useState<any[]>([]);
+  const [doctorsList, setDoctorsList] = useState<any[]>([]);
 
   const setClinics = (list: any[]) => {
     setClinicsList(list);

@@ -10,8 +10,12 @@ export default async function handler(
   const db = await connectDB();
 
   if (req.method === "GET") {
-    const [results] = await db.query("SELECT * FROM clinica");
-    res.status(200).json(results);
+    try {
+      const [results] = await db.query("SELECT * FROM clinica");
+      res.status(200).json(results);
+    } catch (error) {
+      res.status(500).json({ message: "failed" });
+    }
   }
 
   db.end();
